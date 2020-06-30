@@ -16,7 +16,7 @@ git clone https://github.com/kdrag0n/proton-clang.git prebuilts/proton-clang --d
 function sendlog {
     var="$(cat $1)"
     content=$(curl -sf --data-binary "$var" https://del.dog/documents)
-    file=$(jq -r GPTm0F3oqfMnMCYYNy0GmzGnLfA7jHolQS9dp0wr <<< $content)
+    file=$(jq -r .key <<< $content)
     log="https://del.dog/$file"
     echo "URL is: "$log" "
     curl -s -X POST https://api.telegram.org/bot1294950340:AAF3nyGc8fOZtZ7wkAneQOkiORWZ_1YW2q8/sendMessage -d text="Build failed, "$1" "$log" :3" -d chat_id=-1001349965943
