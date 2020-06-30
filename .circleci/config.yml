@@ -1,0 +1,21 @@
+version: 2.1
+jobs:
+  compile:
+   docker:
+      - image: ubuntu:18.04
+   environment:
+      GIT_EMAIL: soniataran79@gmail.com
+      GIT_NAME: aman25502
+      VERSION: 2.2
+   steps:
+      - run:
+          command: |
+           apt-get -y update && apt-get -y upgrade && apt-get -y install bc bison build-essential curl flex g++-multilib gcc gcc-multilib clang git gnupg gperf zip zlib1g-dev unzip ccache repo wget libssl-dev rsync golang-go           
+           git clone https://github.com/aman25502/kernel_xiaomi_msm8937-4.9CAF -b ci-branch kernel --depth=1
+           cd kernel
+           bash unified.sh
+workflows:
+  version: 2.1
+  cooking:
+    jobs:
+      - compile
